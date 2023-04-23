@@ -109,4 +109,14 @@ class Employe
 
         return $this;
     }
+    // get/find/his/has ou age
+    public function getAge() {
+        $interval = date_diff($this->dateNaissance, $now);
+        return $interval->format("%Y");
+    }
+
+    public function __toString()
+    {
+        return $this->prenom." ".$this->nom." (".$this->getEntreprise().")";
+    }
 }

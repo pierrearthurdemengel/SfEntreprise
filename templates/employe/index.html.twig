@@ -3,6 +3,14 @@
 {% block title %}Hello EmployeController!{% endblock %}
 
 {% block body %}
+
+{{ dump(employes)}}
     <h1>Lie des employés</h1>
+
+            {% for employe in employes %}
+
+                <a href="{{ path('show_employe', {'id' : employer.id }) }}">   {{ employe }} </a> <br>
+
+        {% endfor %}
 
 {% endblock %}
