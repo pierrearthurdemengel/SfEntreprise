@@ -34,14 +34,19 @@ class EntrepriseController extends AbstractController
         $entreprise ="";
         return $this->render('entreprise/show.html.twig', [
             'entreprise' => $entreprise
-        ])
+        ]);
     }
 
     /**
 * [Route('/entreprise/add', name: 'add_entreprise')]
+* [Route('/entreprise/{id}/edit', name: 'edit_entreprise')]
 */
 public function add(ManagerRegistry $doctrine, Entreprise $entreprise = null, Request $request): Response 
 {
+    // Si l'entreprise n'existe pas
+    if(!$entreprise) {
+        $entreprise = new Entreprise();
+    }
     // construit un formulaire qui se repose sur le $builder dans EntrepriseType 
     $form = $this->createForm(EntrepriseType::class, $entreprise);
     // analyse de ce qui se passe dans mon form
@@ -63,9 +68,30 @@ public function add(ManagerRegistry $doctrine, Entreprise $entreprise = null, Re
     // vue formulaire add
     return $this->render('entreprise/add.html.twig', [
         // create view = génère la vue du formulaire
-        'formAddEntreprise' => $form->createView()
+        'formAddEntreprise' => $form->createView(),
+        'edit' => $entreprise->getId()
     ]);  
 }
+
+
+    /**
+     * [Route('/entreprise/{id}/delete', name: 'delete_entreprise')]
+    */
+    public function delete(ManagerRegistry $doctrine, Entreprise $entreprise): Response
+{
+    $entityManger = $doctrine->getManager();
+    $entityManager = remove($entreprise);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('app_entreprise');
+}
+
+
+
+
+
+
+
 
 
         /**

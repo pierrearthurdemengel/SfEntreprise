@@ -3,7 +3,16 @@
 {% block title %} Ajouter une Entreprise {% endblock %}
 
 {% block body %}
-    <h1> Ajouter une Entreprise </h1>    
+    
+    
+        {% if confition %}  
+            <h1> Editter une Entreprise </h1>
+
+
+        {% else %}  
+            <h1> Ajouter une Entreprise </h1>
+
+        {% endif %}
  
  
         {% for entreprise in entreprises %}
