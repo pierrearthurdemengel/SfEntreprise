@@ -4,13 +4,17 @@ namespace App\Controller;
 
 
 
+namespace App\Controller;
+
 use App\Entity\Entreprise;
 use App\Form\EntrepriseType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Response as BrowserKitResponse;
 
 
 class EntrepriseController extends AbstractController
@@ -25,22 +29,10 @@ class EntrepriseController extends AbstractController
     'entreprises' => $entreprises
         ]);
     }
-
-    /**
-     * @Route("/entreprises/{id}")
-     */
-    public function show() : Response
-    {
-        $entreprise ="";
-        return $this->render('entreprise/show.html.twig', [
-            'entreprise' => $entreprise
-        ]);
-    }
-
-    /**
-* [Route('/entreprise/add', name: 'add_entreprise')]
-* [Route('/entreprise/{id}/edit', name: 'edit_entreprise')]
-*/
+    
+    #[Route('/entreprise/add', name: 'add_entreprise')]
+    #[Route('/entreprise/{id}/edit', name: 'edit_entreprise')]
+ 
 public function add(ManagerRegistry $doctrine, Entreprise $entreprise = null, Request $request): Response 
 {
     // Si l'entreprise n'existe pas
@@ -64,7 +56,7 @@ public function add(ManagerRegistry $doctrine, Entreprise $entreprise = null, Re
 
         return $this->redirectToRoute('app_entreprise');
     }
-
+    
     // vue formulaire add
     return $this->render('entreprise/add.html.twig', [
         // create view = génère la vue du formulaire
@@ -74,9 +66,8 @@ public function add(ManagerRegistry $doctrine, Entreprise $entreprise = null, Re
 }
 
 
-    /**
-     * [Route('/entreprise/{id}/delete', name: 'delete_entreprise')]
-    */
+    #[Route('/entreprise/{id}/delete', name: 'delete_entreprise')]
+
     public function delete(ManagerRegistry $doctrine, Entreprise $entreprise): Response
 {
     $entityManger = $doctrine->getManager();
@@ -94,12 +85,11 @@ public function add(ManagerRegistry $doctrine, Entreprise $entreprise = null, Re
 
 
 
-        /**
-     * [Route('/entreprise/{id}', name: 'show_entreprise')]
-    */
-    public function show(Entreprise $entreprise): Response
-    {
-        return $this->render('entreprise/show.html.twig', [
+#[Route('/entreprise/{id}', name: 'show_entreprise')]
+
+public function show(Entreprise $entreprise): Response
+{
+    return $this->render('entreprise/show.html.twig', [
             'entreprise' => $entreprise
         ]);
     }
