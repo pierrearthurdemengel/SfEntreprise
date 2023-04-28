@@ -11,9 +11,9 @@
  
         {% for entreprise in entreprises %}
 
-               <a href="{{ path( 'show_entreprise', {'id: entreprise.id}) }}" >{{ entreprise }}</a><br>
-               <a class="btn-warning" btnhref="{{ path( 'edit_entreprise', {'id: entreprise.id}) }}" > Edit </a><br>
-               <a class="btn-danger" btnhref="{{ path( 'delete_entreprise', {'id: entreprise.id}) }}" > Delete </a><br>
+               <a href="{{ path( 'show_entreprise', {'id': entreprise.id}) }}" >{{ entreprise }}</a><br>
+               <a class="btn-warning" btnhref="{{ path( 'edit_entreprise', {'id': entreprise.id}) }}" > Edit </a><br>
+               <a class="btn-danger" btnhref="{{ path( 'delete_entreprise', {'id': entreprise.id}) }}" > Delete </a><br>
                
 
         {% endfor %}
